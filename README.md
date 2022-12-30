@@ -12,9 +12,25 @@ Plugin for SFDX cli to generate manifests for CI/CD or manifest deployment
 [![License](https://img.shields.io/npm/l/sfdx-plugin-git-auto-manifest.svg)](https://github.com/Hendroix/sfdx-plugin-git-auto-manifest/blob/master/package.json)
 
 <!-- toc -->
+* [Debugging your plugin](#debugging-your-plugin)
+<!-- tocstop -->
 <!-- install -->
 <!-- usage -->
+```sh-session
+$ npm install -g sfdx-plugin-git-auto-manifest
+$ sfdx COMMAND
+running command...
+$ sfdx (--version)
+sfdx-plugin-git-auto-manifest/0.0.1 darwin-arm64 node-v18.8.0
+$ sfdx --help [COMMAND]
+USAGE
+  $ sfdx COMMAND
+...
+```
+<!-- usagestop -->
 <!-- commands -->
+
+<!-- commandsstop -->
 <!-- debugging-your-plugin -->
 # Debugging your plugin
 We recommend using the Visual Studio Code (VS Code) IDE for your plugin development. Included in the `.vscode` directory of this plugin is a `launch.json` config file, which allows you to attach a debugger to the node process when running your commands.

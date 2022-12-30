@@ -2,7 +2,7 @@
   "name": "sfdx-plugin-git-auto-manifest",
   "description": "Plugin for SFDX cli to generate manifests for CI/CD or manifest deployment",
   "version": "0.0.1",
-  "author": "Henrik Hupe Olsen",
+  "author": "Hendroix @Hendroix",
   "bugs": "https://github.com/Hendroix/sfdx-plugin-git-auto-manifest/issues",
   "dependencies": {
     "@oclif/core": "^1",
