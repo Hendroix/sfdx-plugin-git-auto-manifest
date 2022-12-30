@@ -4,7 +4,7 @@ sfdx-plugin-git-auto-manifest
 Plugin for SFDX cli to generate manifests for CI/CD or manifest deployment
 
 [![Version](https://img.shields.io/npm/v/sfdx-plugin-git-auto-manifest.svg)](https://npmjs.org/package/sfdx-plugin-git-auto-manifest)
-[![CircleCI](https://circleci.com/gh/Hendroix/sfdx-plugin-git-auto-manifest/tree/master.svg?style=shield)](https://circleci.com/gh/Hendroix/sfdx-plugin-git-auto-manifest/tree/master)
+[![sfdx](https://img.shields.io/badge/cli-sfdx-brightgreen.svg)](https://developer.salesforce.com/tools/sfdxcli)
 [![Appveyor CI](https://ci.appveyor.com/api/projects/status/github/Hendroix/sfdx-plugin-git-auto-manifest?branch=master&svg=true)](https://ci.appveyor.com/project/heroku/sfdx-plugin-git-auto-manifest/branch/master)
 [![Greenkeeper](https://badges.greenkeeper.io/Hendroix/sfdx-plugin-git-auto-manifest.svg)](https://greenkeeper.io/)
 [![Known Vulnerabilities](https://snyk.io/test/github/Hendroix/sfdx-plugin-git-auto-manifest/badge.svg)](https://snyk.io/test/github/Hendroix/sfdx-plugin-git-auto-manifest)
