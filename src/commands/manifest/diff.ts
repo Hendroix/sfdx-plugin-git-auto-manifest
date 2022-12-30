@@ -78,7 +78,7 @@ export default class Diff extends SfdxCommand {
                 await addToGit(this.manifestFileNameWithPath);
             }
         } else {
-            log(`No differnceses found between ${this.currentBranch} and ${this.compareBranch}`);
+            log(`No differnceses found between ${this.currentBranch} and ${this.compareBranch}`, true);
         }
     }
 }

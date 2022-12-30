@@ -1,7 +1,7 @@
 let _log = process.argv.includes('-d');
 
 const log = (message: any, condition = true) => {
-    if (_log && condition) {
+    if (_log || condition) {
         console.log(message);
     }
 };
