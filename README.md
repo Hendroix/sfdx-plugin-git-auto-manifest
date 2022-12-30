@@ -21,7 +21,7 @@ $ npm install -g sfdx-plugin-git-auto-manifest
 $ sfdx COMMAND
 running command...
 $ sfdx (--version)
-sfdx-plugin-git-auto-manifest/0.0.1 darwin-arm64 node-v18.8.0
+sfdx-plugin-git-auto-manifest/1.0.0 darwin-arm64 node-v18.8.0
 $ sfdx --help [COMMAND]
 USAGE
   $ sfdx COMMAND
@@ -29,21 +29,21 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
-* [`sfdx manifest:diff -b <string> [-s] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-manifestdiff--b-string--s---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
+* [`sfdx manifest:diff -b <string> [-d] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-manifestdiff--b-string--d---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 
-## `sfdx manifest:diff -b <string> [-s] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
+## `sfdx manifest:diff -b <string> [-d] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
 
 Command that generate a manifest folder based on a git diff beetween current branch and provided branch.
 
 ```
 USAGE
-  $ sfdx manifest:diff -b <string> [-s] [--json] [--loglevel
+  $ sfdx manifest:diff -b <string> [-d] [--json] [--loglevel
     trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
 
 FLAGS
-  -b, --branch=<value>                                                              (required) [default: RC] The name of
+  -b, --from-branch=<value>                                                         (required) [default: RC] The name of
                                                                                     the branch to compare with.
-  -s, --silent                                                                      If set to false logs will notify
+  -d, --debug                                                                       If set to false logs will notify
                                                                                     about the progress while script is
                                                                                     running.
   --json                                                                            format output as json
@@ -57,7 +57,7 @@ EXAMPLES
   $ sfdx manifest:diff path/to/manifest/folder/manifest-file-name -b name-of-branch-to-diff-against
 ```
 
-_See code: [src/commands/manifest/diff.ts](https://github.com/Hendroix/sfdx-plugin-git-auto-manifest/blob/v0.0.1/src/commands/manifest/diff.ts)_
+_See code: [src/commands/manifest/diff.ts](https://github.com/Hendroix/sfdx-plugin-git-auto-manifest/blob/v1.0.0/src/commands/manifest/diff.ts)_
 <!-- commandsstop -->
 <!-- debugging-your-plugin -->
 # Debugging your plugin
