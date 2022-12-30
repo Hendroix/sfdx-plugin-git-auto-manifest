@@ -21,7 +21,7 @@ $ npm install -g sfdx-plugin-git-auto-manifest
 $ sfdx COMMAND
 running command...
 $ sfdx (--version)
-sfdx-plugin-git-auto-manifest/1.0.0 darwin-arm64 node-v18.8.0
+sfdx-plugin-git-auto-manifest/1.1.0 darwin-arm64 node-v18.8.0
 $ sfdx --help [COMMAND]
 USAGE
   $ sfdx COMMAND
@@ -57,7 +57,7 @@ EXAMPLES
   $ sfdx manifest:diff path/to/manifest/folder/manifest-file-name -b name-of-branch-to-diff-against
 ```
 
-_See code: [src/commands/manifest/diff.ts](https://github.com/Hendroix/sfdx-plugin-git-auto-manifest/blob/v1.0.0/src/commands/manifest/diff.ts)_
+_See code: [src/commands/manifest/diff.ts](https://github.com/Hendroix/sfdx-plugin-git-auto-manifest/blob/v1.1.0/src/commands/manifest/diff.ts)_
 <!-- commandsstop -->
 <!-- debugging-your-plugin -->
 # Debugging your plugin
