@@ -1,8 +1,12 @@
-*-debug.log
-*-error.log
-/.nyc_output
-/dist
-/lib
-/package-lock.json
-/tmp
+
+# use yarn by default, so ignore npm
+package-lock.json
+.npmrc
+npm-error.log
+yarn-error.log
+lerna-debug.log
+coverage
+docs
 node_modules
+.DS_Store
+.idea
