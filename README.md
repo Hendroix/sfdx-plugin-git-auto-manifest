@@ -29,7 +29,35 @@ USAGE
 ```
 <!-- usagestop -->
 <!-- commands -->
+* [`sfdx manifest:diff -b <string> [-s] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`](#sfdx-manifestdiff--b-string--s---json---loglevel-tracedebuginfowarnerrorfataltracedebuginfowarnerrorfatal)
 
+## `sfdx manifest:diff -b <string> [-s] [--json] [--loglevel trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]`
+
+Command that generate a manifest folder based on a git diff beetween current branch and provided branch.
+
+```
+USAGE
+  $ sfdx manifest:diff -b <string> [-s] [--json] [--loglevel
+    trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL]
+
+FLAGS
+  -b, --branch=<value>                                                              (required) [default: RC] The name of
+                                                                                    the branch to compare with.
+  -s, --silent                                                                      If set to false logs will notify
+                                                                                    about the progress while script is
+                                                                                    running.
+  --json                                                                            format output as json
+  --loglevel=(trace|debug|info|warn|error|fatal|TRACE|DEBUG|INFO|WARN|ERROR|FATAL)  [default: warn] logging level for
+                                                                                    this command invocation
+
+DESCRIPTION
+  Command that generate a manifest folder based on a git diff beetween current branch and provided branch.
+
+EXAMPLES
+  $ sfdx manifest:diff path/to/manifest/folder/manifest-file-name -b name-of-branch-to-diff-against
+```
+
+_See code: [src/commands/manifest/diff.ts](https://github.com/Hendroix/sfdx-plugin-git-auto-manifest/blob/v0.0.1/src/commands/manifest/diff.ts)_
 <!-- commandsstop -->
 <!-- debugging-your-plugin -->
 # Debugging your plugin
