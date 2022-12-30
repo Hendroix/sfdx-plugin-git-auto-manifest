@@ -15,4 +15,11 @@ const readFile = async (filePath: string) => {
     return await fs.readFile(filePath);
 };
 
-export { saveFile, readFile };
+const checkIfFileExsists = async (filePath: string) => {
+    return fs
+        .stat(filePath)
+        .then(() => true)
+        .catch(() => false);
+};
+
+export { saveFile, readFile, checkIfFileExsists };
