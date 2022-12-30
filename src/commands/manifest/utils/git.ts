@@ -4,18 +4,16 @@ import { promisify } from 'util';
 import { exec as _exec } from 'child_process';
 const exec = promisify(_exec);
 import { log } from './logger.js';
-import { readFile } from './fs.js';
 
 //CHANGE THIS TO BE THE FALLBACK BRANCH.
-const DEFAULT_FROM_BRANCH = 'origin/RC';
 const DEFAULT_METADATA_PATH = 'force-app/main/default/';
 
 //  diff: 'git --no-pager diff --cached --name-only Origin/fromBranch'
 const GIT_COMMANDS = {
     BRANCH_NAME: 'git rev-parse --abbrev-ref HEAD',
-    CACHED_DIFF: 'git --no-pager diff --cached --name-only',
+    CACHED_DIFF: 'git --no-pager diff --cached --name-only --diff-filter=AM',
     COMPARATIVE_DIFF_WITH: (fromBranch: string, branchName: string) => {
-        return `git --no-pager diff --name-only ${fromBranch}...${branchName}`;
+        return `git --no-pager diff --name-only --diff-filter=AM ${fromBranch}...${branchName}`;
     }
 };
 
@@ -26,15 +24,6 @@ const getBranchName = async () => {
     const manifestFilePath = `manifest/${currentBranchName}.xml`;
     log(`GIT: Branch: ${currentBranchName}, File: ${manifestFilePath}`);
     return { currentBranchName, manifestFilePath };
-};
-
-const getFromBranch = async (branchName: string) => {
-    try {
-        let data = await readFile('.local/env.json');
-        return JSON.parse(Buffer.from(data).toString())[branchName].fromBranch;
-    } catch (error) {
-        return DEFAULT_FROM_BRANCH;
-    }
 };
 
 const getDiff = async (command: string) => {
@@ -57,4 +46,4 @@ const addToGit = async (filePath: string) => {
     log(`GIT: Added ${filePath}`);
 };
 
-export { GIT_COMMANDS, getBranchName, getFromBranch, getDiff, getDiffs, addToGit };
+export { getBranchName, getDiffs, addToGit };

@@ -2,14 +2,10 @@ import * as os from 'os';
 import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
 import { addToGit, getBranchName, getDiffs } from './utils/git';
-import { CREATE_MANIFEST_COMMAND, getManifest } from './utils/manifest';
+import { getManifest, createManifest } from './utils/manifest';
 import { saveFile } from './utils/fs';
 import { log } from './utils/logger';
-import { promisify } from 'util';
-import { exec as _exec } from 'child_process';
 import Readline from './utils/readlineInterface';
-
-const exec = promisify(_exec);
 
 // Initialize Messages with the current plugin directory
 Messages.importMessagesDirectory(__dirname);
@@ -24,7 +20,7 @@ export default class Diff extends SfdxCommand {
     public static args = [{ name: 'fileName' }];
 
     protected static flagsConfig = {
-        branch: flags.string({
+        'from-branch': flags.string({
             char: 'b',
             description: messages.getMessage('branchFlagDescription'),
             required: true,
@@ -38,14 +34,15 @@ export default class Diff extends SfdxCommand {
     };
 
     public async run() {
+        const fromBranch = this.flags['from-branch'];
         const branchConfig = await getBranchName();
         const manifestFileNameWithPath = this.args.fileName || branchConfig.manifestFilePath;
 
-        const diff = await getDiffs(this.flags.branch, branchConfig.currentBranchName);
+        const diff = await getDiffs(fromBranch, branchConfig.currentBranchName);
         const oldManifest = await getManifest(manifestFileNameWithPath);
 
-        if (diff.length > 0 || oldManifest?.types?.length > 0) {
-            await exec(CREATE_MANIFEST_COMMAND(diff, manifestFileNameWithPath?.replace('.xml', '')));
+        if (diff.length > 0 || oldManifest?.types?.size > 0) {
+            await createManifest(diff, manifestFileNameWithPath);
             const manifest = await getManifest(manifestFileNameWithPath);
             manifest.merge(oldManifest);
 
@@ -53,14 +50,14 @@ export default class Diff extends SfdxCommand {
                 await saveFile(manifest.toXML(), manifestFileNameWithPath);
                 const shouldAddToGit = await new Readline().prompt('Do you want to add the manifest to git? (y/n)');
                 log(shouldAddToGit);
-                if (shouldAddToGit !== 'n') {
+                if (!shouldAddToGit.includes('n')) {
                     await addToGit(manifestFileNameWithPath);
                 }
             } else {
                 log('No applicable files have changed, skipping creation/save');
             }
         } else {
-            log(`No differnceses found between ${branchConfig.currentBranchName} and ${this.flags.branch}`);
+            log(`No differnceses found between ${branchConfig.currentBranchName} and ${fromBranch}`);
         }
     }
 }

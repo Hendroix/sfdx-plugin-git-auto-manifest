@@ -1,14 +1,7 @@
 import { promises as fs } from 'fs';
 import { log } from './logger.js';
 
-const checkIfFileExsists = async (filePath) => {
-    return fs
-        .stat(filePath)
-        .then(() => true)
-        .catch(() => false);
-};
-
-const saveFile = async (data, filePath) => {
+const saveFile = async (data: string, filePath: string) => {
     try {
         await fs.writeFile(filePath, Buffer.from(data));
         log(`File: ${filePath} was written to disk.`);
@@ -18,8 +11,8 @@ const saveFile = async (data, filePath) => {
     }
 };
 
-const readFile = async (filePath) => {
+const readFile = async (filePath: string) => {
     return await fs.readFile(filePath);
 };
 
-export { checkIfFileExsists, saveFile, readFile };
+export { saveFile, readFile };

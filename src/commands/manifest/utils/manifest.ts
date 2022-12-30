@@ -1,6 +1,8 @@
-import { exec as _exec } from 'child_process';
 import { readFile } from './fs';
 import { log } from './logger';
+import { exec as _exec } from 'child_process';
+import { promisify } from 'util';
+const exec = promisify(_exec);
 
 interface tag {
     start: string;
@@ -33,17 +35,13 @@ const TAGS = {
     }
 };
 
-const getTagContent = (text, TAG) => {
-    return text.substring(text.indexOf(TAG.start) + TAG.start.length, text.indexOf(TAG.end));
-};
-
 class Manifest {
     comment: string;
     package: tag;
     types: Map<string, Set<string>>;
     version: string;
 
-    constructor(xml) {
+    constructor(xml: string) {
         this.comment = '<?xml version="1.0" encoding="UTF-8" ?>';
         this.package = TAGS.PACKAGE;
         this.types = new Map();
@@ -51,7 +49,7 @@ class Manifest {
         this.parseXML(xml);
     }
 
-    parseXML(xml) {
+    parseXML(xml: string) {
         const version = getTagContent(xml, TAGS.VERSION);
         if (version) {
             this.version = version;
@@ -72,7 +70,7 @@ class Manifest {
         });
     }
 
-    addMember(type, name) {
+    addMember(type: string, name: string) {
         if (!type || !name) {
             console.error('type and name must de defined.');
             return;
@@ -89,7 +87,7 @@ class Manifest {
         this.types.get(type).add(name);
     }
 
-    createTag(type, value, indentLevel = 0) {
+    createTag(type: string, value: string, indentLevel: number = 0) {
         var tag = '';
         for (let i = 0; i < indentLevel; i++) {
             tag += '    ';
@@ -110,7 +108,7 @@ class Manifest {
         return types.join('\n');
     }
 
-    merge(manifest) {
+    merge(manifest: Manifest) {
         if (manifest instanceof Manifest) {
             manifest?.types?.forEach((members, key) => members.forEach((member) => this.addMember(key, member)));
         }
@@ -122,13 +120,13 @@ class Manifest {
     }
 }
 
-const CREATE_MANIFEST_COMMAND = (sourcePaths, manifestFilePath) => {
-    return `sfdx force:source:manifest:create --sourcepath "${sourcePaths?.join(',')}" --manifestname ${manifestFilePath}`;
+const getTagContent = (text: string, TAG: tag) => {
+    return text.substring(text.indexOf(TAG.start) + TAG.start.length, text.indexOf(TAG.end));
 };
 
-const getManifest = async (filePath) => {
+const getManifest = async (filePath: string) => {
     let data = Buffer.from('');
-    let manifest;
+    let manifest: Manifest;
     try {
         data = await readFile(filePath);
         manifest = new Manifest(Buffer.from(data).toString());
@@ -138,4 +136,8 @@ const getManifest = async (filePath) => {
     return manifest;
 };
 
-export { Manifest, CREATE_MANIFEST_COMMAND, getManifest };
+const createManifest = async (sourcePaths: string[], manifestFilePath: string) => {
+    await exec(`sfdx force:source:manifest:create --sourcepath "${sourcePaths?.join(',')}" --manifestname ${manifestFilePath?.replace('.xml', '')}`);
+};
+
+export { Manifest, getManifest, createManifest };
