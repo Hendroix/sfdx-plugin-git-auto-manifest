@@ -47,8 +47,11 @@ const addToGit = async (filePath: string) => {
 };
 
 const isInsideGitProject = async () => {
-    const checkForGit = (await exec('git rev-parse --is-inside-work-tree 2>/dev/null')).stdout;
-    return !!checkForGit;
+    try {
+        return !!(await exec('git rev-parse --is-inside-work-tree 2>/dev/null')).stdout;
+    } catch (error) {
+        return false;
+    }
 };
 
 const validateIsInsideGitProjet = async () => {
