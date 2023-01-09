@@ -1,7 +1,7 @@
 import * as os from 'os';
 import { flags, SfdxCommand } from '@salesforce/command';
 import { Messages } from '@salesforce/core';
-import { addToGit, getBranchName, getDiffs } from '../../utils/git';
+import { addToGit, getBranchName, getDiffs, validateIsInsideGitProjet } from '../../utils/git';
 import { getManifest, createManifest, Manifest } from '../../utils/manifest';
 import { checkIfFileExsists, saveFile } from '../../utils/fs';
 import { log } from '../../utils/logger';
@@ -41,6 +41,8 @@ export default class Diff extends SfdxCommand {
     };
 
     public async run() {
+        await validateIsInsideGitProjet();
+
         this.compareBranch = this.flags['from-branch'];
         const branchConfig = await getBranchName();
         this.currentBranch = branchConfig.currentBranchName;

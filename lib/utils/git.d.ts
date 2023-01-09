@@ -4,4 +4,5 @@ declare const getBranchName: () => Promise<{
 }>;
 declare const getDiffs: (targetBranchName: string, currentBranchName: string) => Promise<string[]>;
 declare const addToGit: (filePath: string) => Promise<void>;
-export { getBranchName, getDiffs, addToGit };
+declare const validateIsInsideGitProjet: () => Promise<void>;
+export { getBranchName, getDiffs, addToGit, validateIsInsideGitProjet };

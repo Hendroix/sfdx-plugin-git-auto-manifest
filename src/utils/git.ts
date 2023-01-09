@@ -46,4 +46,16 @@ const addToGit = async (filePath: string) => {
     log(`GIT: Added ${filePath}`);
 };
 
-export { getBranchName, getDiffs, addToGit };
+const isInsideGitProject = async () => {
+    const checkForGit = (await exec('git rev-parse --is-inside-work-tree 2>/dev/null')).stdout;
+    return checkForGit === 'true';
+};
+
+const validateIsInsideGitProjet = async () => {
+    const isInsideGit = await isInsideGitProject();
+    if (!isInsideGit) {
+        throw new Error('You are not inside a git project. Please navigate to one to use this plugin.');
+    }
+};
+
+export { getBranchName, getDiffs, addToGit, validateIsInsideGitProjet };
