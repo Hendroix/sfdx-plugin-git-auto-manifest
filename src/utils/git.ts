@@ -56,6 +56,7 @@ const validateIsInsideGitProjet = async () => {
     if (!isInsideGit) {
         throw new Error('You are not inside a git project. Please navigate to one to use this plugin.');
     }
+    log('Inside git project.');
 };
 
 export { getBranchName, getDiffs, addToGit, validateIsInsideGitProjet };
