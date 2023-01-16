@@ -1,6 +1,6 @@
 {
     "commandDescription": "Command that generate a manifest folder based on a git diff beetween current branch and provided branch.",
-    "branchFlagDescription": "The name of the branch to compare with.",
+    "branchFlagDescription": "The name of the branch to compare with, if not provided it uses whats set in plugin configuration.",
     "silentFlagDescription": "If set to false logs will notify about the progress while script is running.",
     "diffExamples": ["sfdx manifest:diff path/to/manifest/folder/manifest-file-name -b name-of-branch-to-diff-against"]
 }

@@ -21,9 +21,8 @@ const getBranchName = async () => {
     const { stdout, stderr } = await exec(GIT_COMMANDS.BRANCH_NAME);
     if (stderr) throw new Error('Could not get git branch name');
     const currentBranchName = stdout.replace(/\n|\r/g, '');
-    const manifestFilePath = `manifest/${currentBranchName}.xml`;
-    log(`GIT: Branch: ${currentBranchName}, File: ${manifestFilePath}`);
-    return { currentBranchName, manifestFilePath };
+    log(`GIT: Branch: ${currentBranchName}`);
+    return currentBranchName;
 };
 
 const getDiff = async (command: string) => {
@@ -54,7 +53,7 @@ const isInsideGitProject = async () => {
     }
 };
 
-const validateIsInsideGitProjet = async () => {
+const validateIsInsideGitProject = async () => {
     const isInsideGit = await isInsideGitProject();
     if (!isInsideGit) {
         throw new Error('You are not inside a git project. Please navigate to one to use this plugin.');
@@ -62,4 +61,10 @@ const validateIsInsideGitProjet = async () => {
     log('Inside git project.');
 };
 
-export { getBranchName, getDiffs, addToGit, validateIsInsideGitProjet };
+const doesBranchExists = async (branchName: string) => {
+    return exec(`git rev-parse --verify ${branchName}`)
+        .then(() => true)
+        .catch(() => false);
+};
+
+export { getBranchName, getDiffs, addToGit, validateIsInsideGitProject, doesBranchExists };

@@ -17,4 +17,6 @@ export default class Diff extends SfdxCommand {
         debug: flags.Discriminated<flags.Boolean<boolean>>;
     };
     run(): Promise<void>;
+    private getConfig;
+    private popuatePluginConfigProperties;
 }

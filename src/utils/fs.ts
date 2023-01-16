@@ -22,4 +22,11 @@ const checkIfFileExsists = async (filePath: string) => {
         .catch(() => false);
 };
 
-export { saveFile, readFile, checkIfFileExsists };
+const checkIfFolderExsists = async (filePath: string) => {
+    return fs
+        .access(filePath)
+        .then(() => true)
+        .catch(() => false);
+};
+
+export { saveFile, readFile, checkIfFileExsists, checkIfFolderExsists };
