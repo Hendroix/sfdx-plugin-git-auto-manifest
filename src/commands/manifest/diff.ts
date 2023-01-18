@@ -49,7 +49,8 @@ export default class Diff extends SfdxCommand {
         this.ux.startSpinner('Getting branch and plugin config');
         this.compareBranch = this.flags['from-branch'] || pluginConfig['default-branch'];
         this.currentBranch = await getBranchName();
-        this.manifestFileNameWithPath = this.args.fileName || `${pluginConfig['manifest-path']}${this.currentBranch}.xml}`;
+        this.manifestFileNameWithPath = this.args.fileName || `${pluginConfig['manifest-path']}${this.currentBranch}.xml`;
+        log(`Manifest file path: ${this.manifestFileNameWithPath}`);
         this.ux.stopSpinner();
 
         this.ux.startSpinner('Fetching diffs');
