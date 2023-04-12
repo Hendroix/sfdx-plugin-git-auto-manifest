@@ -1,6 +1,7 @@
 
 # use yarn by default, so ignore npm
 package-lock.json
+yarn.lock
 .npmrc
 npm-error.log
 yarn-error.log
